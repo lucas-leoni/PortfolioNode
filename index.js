@@ -1,57 +1,83 @@
 const express = require('express');
-
 const app = express();
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded( { extended: true }));
+app.use(bodyParser.json());
+
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+
 app.get('/', function(req, res) {
-    res.send('Você está na página principal do Portfolio');
+    res.render('index');
 });
 
 app.get('/home', function(req, res) {
-    res.send('Você está na página principal do Portfolio');
+    res.render('index');
 });
 
-app.get('/perfil', function(req, res) {
-    res.send('Você está na página perfil');
+app.get('/perfil/:nome?/:idade?/:cor?', (request, response) => {
+    let nome = request.params.nome;
+    let idade = request.params.idade;
+    let cor = request.params.cor;
+    response.render('perfil', {
+        nome,
+        idade,
+        cor,
+    });
 });
 
-app.get('/perfil/:nome/:idade?/:cor?', (request, response) => {
-    const nome = request.params.nome;
-    const idade = request.params.idade;
-    const cor = request.params.cor;
-    response.send(`Eu sou o ${nome}, tenho ${idade} anos e sou da cor ${cor}`);
+app.get('/graduacao/:graduacao?/:instituicao?/:cidade?', (request, response) => {
+    let graduacao = request.params.graduacao;
+    let instituicao = request.params.instituicao;
+    let cidade = request.params.cidade;
+    response.render('graduacao', {
+        graduacao,
+        instituicao,
+        cidade,
+    });
 });
 
-app.get('/graduacao', function(req, res) {
-    res.send('Você está na página graduação');
+app.get('/trabalho/:profissao?/:empresa?/:cidade?', (request, response) => {
+    let profissao = request.params.profissao;
+    let empresa = request.params.empresa;
+    let cidade = request.params.cidade;
+    response.render('trabalho', {
+        profissao,
+        empresa,
+        cidade,
+    });
 });
 
-app.get('/graduacao/:graduacao/:instituicao/:cidade', (request, response) => {
-    const graduacao = request.params.graduacao;
-    const instituicao = request.params.instituicao;
-    const cidade = request.params.cidade;
-    response.send(`Eu estudo ${graduacao}, na faculdade ${instituicao} que se localiza em ${cidade}`);
+app.get('/contato/:celular?/:telefone?/:email?', (request, response) => {
+    let celular = request.params.celular;
+    let telefone = request.params.telefone;
+    let email = request.params.email;
+    response.render('contato', {
+        celular,
+        telefone,
+        email,
+    });
 });
 
-app.get('/trabalho', function(req, res) {
-    res.send('Você está na página trabalho');
+app.get('/artigos', function(req, res) {
+    res.render('artigos');
 });
 
-app.get('/trabalho/:profissao/:empresa/:cidade', (request, response) => {
-    const profissao = request.params.profissao;
-    const empresa = request.params.empresa;
-    const cidade = request.params.cidade;
-    response.send(`Eu sou ${profissao}, na empresa ${empresa} que se localiza em ${cidade}`);
+app.get('/novo-artigo', function(req, res) {
+    res.render('novo-artigo');
 });
 
-app.get('/contato', function(req, res) {
-    res.send('Você está na página contato');
-});
-
-app.get('/contato/:celular/:telefone/:email', (request, response) => {
-    const celular = request.params.celular;
-    const telefone = request.params.telefone;
-    const email = request.params.email;
-    response.send(`Meus contatos são: Celular: ${celular} | Telefone: ${telefone} | email ${email}`);
+app.post('/artigos', (req, res) => {
+    let title = req.body.titulo;
+    let description = req.body.descricao;
+    let date = req.body.data;
+    console.log(`Dados do formulario salvo: Titulo: ${title}  Descricao: ${description}  Data: ${date}`);
+    res.render('artigos', {
+        title,
+        description,
+        date,
+    });
 });
 
 app.listen(9090, (erro) => {

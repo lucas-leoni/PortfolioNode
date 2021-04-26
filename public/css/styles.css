@@ -1,0 +1,79 @@
+body {
+    background-color: #1bb4c9;
+}
+
+header {
+    display: flex;
+    margin: 20px 0px 0px 0px;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0px 30px 0px 30px;
+}
+
+a:hover {
+    color: blue; 
+}
+
+h1 {
+    text-align: center;
+    margin: 50px 0px 0px 0px;
+}
+
+.div-h1 {
+    background-color: #F7F7F7;
+    margin: 25px 70px 0px 70px;
+    border: 1px solid #d7dde0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.div-h1 h1 {
+    margin: 10px;
+}
+
+.div-form {
+    margin: 0px 70px 0px 70px;
+    border: 1px solid #d7dde0;
+    background-color: #FFFFFF;
+}
+
+label {
+    font-weight: bold;
+    padding: 15px 0px 0px 0px;
+}
+
+.form-control {
+    font-weight: bold;
+}
+
+.form-group {
+    padding: 0px 25px 0px 25px;
+}
+
+.data-hora {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px 20px 0px;
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+}
+
+#ver-artigos {
+    margin: 50px 0px 0px 0px;
+}
