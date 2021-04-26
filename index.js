@@ -1,6 +1,9 @@
 const express = require('express');
-
 const app = express();
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded( { extended: true }));
+app.use(bodyParser.json());
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -54,6 +57,26 @@ app.get('/contato/:celular?/:telefone?/:email?', (request, response) => {
         celular,
         telefone,
         email,
+    });
+});
+
+app.get('/artigos', function(req, res) {
+    res.render('artigos');
+});
+
+app.get('/novo-artigo', function(req, res) {
+    res.render('novo-artigo');
+});
+
+app.post('/artigos', (req, res) => {
+    let title = req.body.titulo;
+    let description = req.body.descricao;
+    let date = req.body.data;
+    console.log(`Dados do formulario salvo: Titulo: ${title}  Descricao: ${description}  Data: ${date}`);
+    res.render('artigos', {
+        title,
+        description,
+        date,
     });
 });
 
